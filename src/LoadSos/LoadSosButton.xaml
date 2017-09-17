@@ -1,0 +1,14 @@
+﻿<fluent:ToggleButton x:Class="WinDbgExt.LoadSos.LoadSosButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WinDbgExt.LoadSos"
+             xmlns:fluent="urn:fluent-ribbon"
+             mc:Ignorable="d" 
+                     Header="SOS"
+                     IsChecked="{Binding Path=IsLoaded, Mode=OneWay}"
+                     Command="{Binding Path=LoadSosCommand}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+</fluent:ToggleButton>
