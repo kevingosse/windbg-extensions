@@ -24,7 +24,6 @@ namespace WinDbgExt.History
         private void Show()
         {
             _toolWindowManager.OpenToolWindow("CommandHistoryWindow");
-
         }
     }
 }

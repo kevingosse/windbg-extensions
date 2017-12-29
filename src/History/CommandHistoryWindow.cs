@@ -11,17 +11,26 @@ using DbgX.Util;
 
 namespace WinDbgExt.History
 {
+    public interface IHistoryManager
+    {
+        void LogCommand(string command, string output);
+    }
+
     [NamedPartMetadata("CommandHistoryWindow", 0), Export(typeof(IDbgToolWindow))]
     [Export(typeof(IDbgDmlOutputListener))]
     [Export(typeof(IDbgCommandExecutionListener))]
     [Export(typeof(IDbgEngineStatusListener))]
-    public class CommandHistoryWindow : BindableBase, IDbgToolWindow, IDbgDmlOutputListener, IDbgCommandExecutionListener, IDbgEngineStatusListener
+    [Export(typeof(IHistoryManager))]
+    public class CommandHistoryWindow : BindableBase, IDbgToolWindow, IDbgDmlOutputListener, IDbgCommandExecutionListener, IDbgEngineStatusListener, IHistoryManager
     {
         private StringBuilder _output = new StringBuilder();
         private string _currentCommand;
 
         [Import]
         private IDbgConsole _console;
+
+        [Import]
+        private IDbgToolWindowManager _toolWindowManager;
 
         public CommandHistoryWindow()
         {
@@ -33,7 +42,7 @@ namespace WinDbgExt.History
             return new ContentControl
             {
                 DataContext = this,
-                Content = new WinDbgExt.History.HistoryControl(_console) { DataContext = this }
+                Content = new HistoryControl(_toolWindowManager) { DataContext = this }
             };
         }
 
@@ -62,8 +71,14 @@ namespace WinDbgExt.History
 
         public static string StripDml(string output)
         {
-            return Regex.Replace(output, @"<exec[^>]*>", string.Empty)
-                .Replace("</exec>", string.Empty);
+            return output;
+            //return Regex.Replace(output, @"<exec[^>]*>", string.Empty)
+            //    .Replace("</exec>", string.Empty);
+        }
+
+        public void LogCommand(string command, string output)
+        {
+            History.Add(Tuple.Create(command, output));
         }
     }
 }
