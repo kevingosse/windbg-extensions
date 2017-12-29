@@ -102,6 +102,8 @@ namespace WinDbgExt.History
                 _command = command;
             }
 
+            public event EventHandler CanExecuteChanged;
+
             public bool CanExecute(object parameter)
             {
                 return true;
@@ -111,8 +113,6 @@ namespace WinDbgExt.History
             {
                 _command();
             }
-
-            public event EventHandler CanExecuteChanged;
         }
     }
 }

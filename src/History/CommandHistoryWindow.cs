@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using DbgX.Interfaces;
 using DbgX.Interfaces.Listeners;
@@ -11,17 +10,12 @@ using DbgX.Util;
 
 namespace WinDbgExt.History
 {
-    public interface IHistoryManager
-    {
-        void LogCommand(string command, string output);
-    }
-
-    [NamedPartMetadata("CommandHistoryWindow", 0), Export(typeof(IDbgToolWindow))]
+    [NamedPartMetadata("CommandHistoryWindow"), Export(typeof(IDbgToolWindow))]
     [Export(typeof(IDbgDmlOutputListener))]
     [Export(typeof(IDbgCommandExecutionListener))]
     [Export(typeof(IDbgEngineStatusListener))]
     [Export(typeof(IHistoryManager))]
-    public class CommandHistoryWindow : BindableBase, IDbgToolWindow, IDbgDmlOutputListener, IDbgCommandExecutionListener, IDbgEngineStatusListener, IHistoryManager
+    public class CommandHistoryWindow : IDbgToolWindow, IDbgDmlOutputListener, IDbgCommandExecutionListener, IDbgEngineStatusListener, IHistoryManager
     {
         private StringBuilder _output = new StringBuilder();
         private string _currentCommand;
@@ -35,15 +29,14 @@ namespace WinDbgExt.History
         public CommandHistoryWindow()
         {
             History = new ObservableCollection<Tuple<string, string>>();
+            OpenPreviousCommand = new DelegateCommand<string>(OpenPrevious);
         }
+
+        public DelegateCommand<string> OpenPreviousCommand { get; }
 
         public Control GetToolWindowView(object parameter)
         {
-            return new ContentControl
-            {
-                DataContext = this,
-                Content = new HistoryControl(_toolWindowManager) { DataContext = this }
-            };
+            return new HistoryControl { DataContext = this };
         }
 
         public ObservableCollection<Tuple<string, string>> History { get; }
@@ -63,22 +56,18 @@ namespace WinDbgExt.History
         {
             if (!busy && _currentCommand != null)
             {
-                var output = StripDml(_output.ToString());
-
-                History.Add(Tuple.Create(_currentCommand, output));
+                LogCommand(_currentCommand, _output.ToString());
             }
-        }
-
-        public static string StripDml(string output)
-        {
-            return output;
-            //return Regex.Replace(output, @"<exec[^>]*>", string.Empty)
-            //    .Replace("</exec>", string.Empty);
         }
 
         public void LogCommand(string command, string output)
         {
             History.Add(Tuple.Create(command, output));
+        }
+
+        private void OpenPrevious(string command)
+        {
+            _toolWindowManager.OpenToolWindow("CommandWindow", command);
         }
     }
 }
