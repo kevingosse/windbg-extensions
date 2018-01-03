@@ -34,6 +34,10 @@
       <HintPath>..\..\lib\DbgX.Interfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DbgX.Interfaces.Internal">
+      <HintPath>..\..\lib\DbgX.Interfaces.Internal.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="DbgX.Util">
       <HintPath>..\..\lib\DbgX.Util.dll</HintPath>
       <Private>False</Private>
@@ -62,7 +66,7 @@
       <DependentUpon>CommandControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="CommandHistoryWindow.cs" />
-    <Compile Include="CommandWindowManager.cs" />
+    <Compile Include="CommandWindow.cs" />
     <Compile Include="HistoryButton.xaml.cs">
       <DependentUpon>HistoryButton.xaml</DependentUpon>
     </Compile>

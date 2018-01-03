@@ -13,7 +13,7 @@
         <ListBox x:Name="HistoryList" ItemsSource="{Binding Path=History}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding Path=OpenPreviousCommand}" CommandParameter="{Binding Path=SelectedItem.Item2, ElementName=HistoryList}" />
+                    <i:InvokeCommandAction Command="{Binding Path=OpenCommand}" CommandParameter="{Binding Path=SelectedItem.Item2, ElementName=HistoryList}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>

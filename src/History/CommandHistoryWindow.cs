@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Text;
-using System.Windows.Controls;
+using System.Windows;
 using DbgX.Interfaces;
 using DbgX.Interfaces.Listeners;
 using DbgX.Interfaces.Services;
@@ -29,12 +29,12 @@ namespace WinDbgExt.History
         public CommandHistoryWindow()
         {
             History = new ObservableCollection<Tuple<string, string>>();
-            OpenPreviousCommand = new DelegateCommand<string>(OpenPrevious);
+            OpenCommand = new DelegateCommand<string>(Open);
         }
 
-        public DelegateCommand<string> OpenPreviousCommand { get; }
+        public DelegateCommand<string> OpenCommand { get; }
 
-        public Control GetToolWindowView(object parameter)
+        public FrameworkElement GetToolWindowView(object parameter)
         {
             return new HistoryControl { DataContext = this };
         }
@@ -65,9 +65,9 @@ namespace WinDbgExt.History
             History.Add(Tuple.Create(command, output));
         }
 
-        private void OpenPrevious(string command)
+        private void Open(string commandOutput)
         {
-            _toolWindowManager.OpenToolWindow("CommandWindow", command);
+            _toolWindowManager.OpenToolWindow("CommandWindow", commandOutput);
         }
     }
 }
