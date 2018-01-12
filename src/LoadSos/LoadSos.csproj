@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="DbgX.Interfaces.Internal">
       <HintPath>..\..\lib\DbgX.Interfaces.Internal.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="DbgX.Util">
       <HintPath>..\..\lib\DbgX.Util.dll</HintPath>

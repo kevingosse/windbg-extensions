@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Threading;
 using DbgX.Interfaces.Services;
 
 namespace WinDbgExt.History
@@ -56,11 +57,11 @@ namespace WinDbgExt.History
 
         private void AppendDmlOutput(string content)
         {
-            var matches = Regex.Matches(content, @"<exec cmd=\""(?<command>.+?)\"">(?<label>.+?)</exec>");
-
             var paragraph = new Paragraph();
 
             ContentTextBox.Document.Blocks.Add(paragraph);
+
+            var matches = Regex.Matches(content, @"<exec cmd=\""(?<command>.+?)\"">(?<label>.+?)</exec>");
 
             int index = 0;
 
@@ -72,7 +73,6 @@ namespace WinDbgExt.History
 
                 var command = match.Groups["command"].Value;
 
-                hyperLink.Tag = command;
                 hyperLink.Command = new DmlCommand(() => _ = ExecuteCommand(command));
 
                 paragraph.Inlines.Add(hyperLink);
@@ -85,12 +85,7 @@ namespace WinDbgExt.History
                 paragraph.Inlines.Add(new Run(System.Net.WebUtility.HtmlDecode(content.Substring(index))));
             }
 
-            ContentTextBox.ScrollToEnd();
-        }
-
-        private void ContentTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            ((RichTextBox)sender).ScrollToEnd();
+            Dispatcher.InvokeAsync(() => ContentTextBox.ScrollToEnd(), DispatcherPriority.ApplicationIdle);
         }
 
         private class DmlCommand : ICommand
@@ -104,15 +99,9 @@ namespace WinDbgExt.History
 
             public event EventHandler CanExecuteChanged;
 
-            public bool CanExecute(object parameter)
-            {
-                return true;
-            }
+            public bool CanExecute(object parameter) => true;
 
-            public void Execute(object parameter)
-            {
-                _command();
-            }
+            public void Execute(object parameter) => _command();
         }
     }
 }
