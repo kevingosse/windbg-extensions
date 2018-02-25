@@ -4,8 +4,10 @@ using System.ComponentModel.Composition;
 using System.Text;
 using System.Windows;
 using DbgX.Interfaces;
+using DbgX.Interfaces.Enums;
 using DbgX.Interfaces.Listeners;
 using DbgX.Interfaces.Services;
+using DbgX.Interfaces.Structs;
 using DbgX.Util;
 
 namespace WinDbgExt.History
