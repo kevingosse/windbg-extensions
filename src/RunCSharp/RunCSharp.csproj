@@ -43,7 +43,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Fluent">
-      <HintPath>..\..\..\git\windbg-extensions\lib\Fluent.dll</HintPath>
+      <HintPath>..\..\lib\Fluent.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">

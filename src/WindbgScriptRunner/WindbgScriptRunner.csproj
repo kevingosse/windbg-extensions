@@ -87,6 +87,7 @@
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="AssemblyInfo" />
     </GetAssemblyIdentity>
+    <MakeDir Directories="$(SolutionDir)\..\runner" />
     <WriteLinesToFile File="$(SolutionDir)\..\runner\version.txt" Overwrite="true" Lines="%(AssemblyInfo.Version)" />
     <ZipDir
       ZipFileName="$(SolutionDir)\..\runner\runner.zip"
