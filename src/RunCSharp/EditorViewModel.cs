@@ -37,13 +37,14 @@ namespace RunCSharp
         {
             if (!_isRunnerLoaded)
             {
-                await PrepareRunner();
+                var path = PrepareRunner();
+                await LoadRunner(path);
             }
 
             _toolWindowManager.OpenToolWindow("CSharpScriptWindow");
         }
 
-        private async Task PrepareRunner()
+        private string PrepareRunner()
         {
             var assembly = Assembly.GetExecutingAssembly();
 
@@ -69,10 +70,10 @@ namespace RunCSharp
                     if (installedVersion == version)
                     {
                         // This version is already installed, nothing to do
-                        return;
+                        return destinationFolder;
                     }
                 }
-                
+
                 Directory.Delete(destinationFolder, true);
             }
 
@@ -92,7 +93,12 @@ namespace RunCSharp
 
             File.Delete(tempFile);
 
-            await _console.ExecuteCommandAsync($".load {Path.Combine(destinationFolder, "WindbgScriptRunner.dll")}");
+            return destinationFolder;
+        }
+
+        private async Task LoadRunner(string destinationFolder)
+        {
+            await _console.ExecuteCommandAndCaptureOutputAsync($".load {Path.Combine(destinationFolder, "WindbgScriptRunner.dll")}");
 
             _isRunnerLoaded = true;
         }
