@@ -6,6 +6,6 @@
              xmlns:fluent="urn:fluent-ribbon"
              mc:Ignorable="d" 
                Header="History"
-               LargeIcon="pack://application:,,,/WinDbgExt.History;component/Time-Window-256.png"
+               LargeIcon="pack://application:,,,/WinDbgExt.History;component/ribbon_history.png"
                Command="{Binding Path=ShowCommand}">
 </fluent:Button>

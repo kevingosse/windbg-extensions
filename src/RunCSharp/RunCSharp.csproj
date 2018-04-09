@@ -90,6 +90,9 @@
       <Link>version.txt</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ribbon_csharp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /I /Y "$(TargetDir)*.*"  "%25LOCALAPPDATA%25\DBG\UIExtensions"</PostBuildEvent>
