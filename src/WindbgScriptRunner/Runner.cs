@@ -1,5 +1,7 @@
 ﻿using System;
 using System.CodeDom.Compiler;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -146,6 +148,20 @@ namespace WindbgScriptRunner
                 // for a live process or iDNA trace.  If you use the IDebug* apis to detect
                 // that we are debugging a crash dump you may skip this call for better perf.
                 Runtime.Flush();
+                
+                // Temporary workaround for a bug in ClrMD
+                // To be removed when https://github.com/Microsoft/clrmd/pull/94 get published on NuGet
+                var type = Type.GetType("Microsoft.Diagnostics.Runtime.Desktop.DesktopRuntimeBase, Microsoft.Diagnostics.Runtime");
+
+                var modules = type.GetField("_modules", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(Runtime)
+                    as IDictionary;
+
+                modules?.Clear();
+
+                var moduleFiles = type.GetField("_moduleFiles", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(Runtime)
+                    as IDictionary;
+
+                moduleFiles?.Clear();
             }
 
             return Runtime != null;
