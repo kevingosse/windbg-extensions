@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Runtime.CompilerServices;
@@ -65,9 +66,10 @@ namespace WinDbgExt.LoadSos
             LoadSosCommand.RaiseCanExecuteChanged();
         }
 
-        private Task LoadSos()
+        private async Task LoadSos()
         {
-            return _console.ExecuteCommandAsync(".loadby sos clr");
+            _console.PrintTextToConsole(await _console.ExecuteLocalCommandAndCaptureOutputAsync(".loadby sos clr"));
+            _console.PrintTextToConsole(await _console.ExecuteLocalCommandAndCaptureOutputAsync(".cordll -l -e"));
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
