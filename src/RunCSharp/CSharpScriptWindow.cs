@@ -4,7 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using DbgX.Interfaces;
 using DbgX.Interfaces.Services;
+using DbgX.Util;
 using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Highlighting;
 
 namespace RunCSharp
@@ -15,39 +17,20 @@ namespace RunCSharp
         [Import]
         private IDbgConsole _console;
 
-        public FrameworkElement GetToolWindowView(object parameter)
+        public CSharpScriptWindow()
         {
-            var contentControl = new ContentControl();
-
-            var textViewHost = new TextEditor
-            {
-                SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("C#")
-            };
-
-            var panel = new Grid();
-
-            panel.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            panel.RowDefinitions.Add(new RowDefinition());
-
-            var runButton = new Button { Content = "Run", Tag = textViewHost };
-
-            runButton.Click += RunButton_Click;
-
-            Grid.SetRow(runButton, 0);
-            Grid.SetRow(textViewHost, 1);
-
-            panel.Children.Add(runButton);
-            panel.Children.Add(textViewHost);
-
-            contentControl.Content = panel;
-            
-            return contentControl;
+            EditorDocument = new TextDocument();
+            RunCommand = new DelegateCommand(Run);
         }
 
-        private async void RunButton_Click(object sender, RoutedEventArgs e)
-        {
-            var textViewHost = (TextEditor)((Button)sender).Tag;
+        public DelegateCommand RunCommand { get; }
 
+        public TextDocument EditorDocument { get; set; }
+
+        public FrameworkElement GetToolWindowView(object _) => new EditorControl { DataContext = this };
+
+        private async void Run()
+        {
             var code = $@"
 using System;
 using Microsoft.Diagnostics.Runtime;
@@ -59,7 +42,7 @@ namespace Test
     {{
         public static void Run(ClrHeap heap)
         {{
-            {textViewHost.Text}
+            {EditorDocument.Text}
         }}
     }}
 }}";
