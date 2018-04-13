@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using DbgX.Interfaces;
 using DbgX.Interfaces.Services;
+using DbgX.Interfaces.UI;
 using DbgX.Util;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
@@ -27,7 +30,14 @@ namespace RunCSharp
 
         public TextDocument EditorDocument { get; set; }
 
-        public FrameworkElement GetToolWindowView(object _) => new EditorControl { DataContext = this };
+        public FrameworkElement GetToolWindowView(object _)
+        {
+            var control = new EditorControl { DataContext = this };
+
+            ToolWindowView.SetTabTitle(control, new ToolWindowTitle("Run C# script"));
+
+            return control;
+        }
 
         private async void Run()
         {
@@ -51,9 +61,22 @@ namespace Test
 
             File.WriteAllText(file, code);
 
-            var output = await _console.ExecuteCommandAndCaptureOutputAsync($"!compileandrun {file}");
+            _console.PrintTextToConsole("Executing script..." + Environment.NewLine);
 
-            _console.PrintTextToConsole(output);
+            var stopwatch = Stopwatch.StartNew();
+
+            try
+            {
+                var output = await _console.ExecuteCommandAndCaptureOutputAsync($"!compileandrun {file}");
+
+                _console.PrintTextToConsole(output);
+
+                _console.PrintTextToConsole($"Execution done in {stopwatch.Elapsed.TotalSeconds} seconds" + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                _console.PrintTextToConsole("Execution failed with error: " + ex + Environment.NewLine);
+            }
 
             File.Delete(file);
         }

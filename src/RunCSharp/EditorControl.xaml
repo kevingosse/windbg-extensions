@@ -15,6 +15,7 @@
 
         <avalonedit:TextEditor 
             Grid.Row="0"
+            Padding="5"
             SyntaxHighlighting="C#"
             Document="{Binding Path=EditorDocument, Mode=TwoWay}"
             KeyDown="TextEditor_KeyDown"/>
