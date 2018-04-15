@@ -7,8 +7,8 @@
     <ProjectGuid>{ACC95BA0-308A-4932-840A-D3346E98F33A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RunCSharp</RootNamespace>
-    <AssemblyName>RunCSharp</AssemblyName>
+    <RootNamespace>WinDbgExt.RunCSharp</RootNamespace>
+    <AssemblyName>WinDbgExt.RunCSharp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

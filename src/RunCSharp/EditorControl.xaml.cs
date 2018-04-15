@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace RunCSharp
+namespace WinDbgExt.RunCSharp
 {
     public partial class EditorControl
     {

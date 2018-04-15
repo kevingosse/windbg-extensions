@@ -3,16 +3,13 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using DbgX.Interfaces;
 using DbgX.Interfaces.Services;
 using DbgX.Interfaces.UI;
 using DbgX.Util;
-using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
-using ICSharpCode.AvalonEdit.Highlighting;
 
-namespace RunCSharp
+namespace WinDbgExt.RunCSharp
 {
     [NamedPartMetadata("CSharpScriptWindow"), Export(typeof(IDbgToolWindow))]
     public class CSharpScriptWindow : IDbgToolWindow

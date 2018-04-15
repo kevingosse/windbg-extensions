@@ -1,4 +1,4 @@
-﻿namespace RunCSharp
+﻿namespace WinDbgExt.RunCSharp
 {
     /// <summary>
     /// Interaction logic for OpenEditorButton.xaml

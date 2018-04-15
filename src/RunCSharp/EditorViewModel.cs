@@ -1,15 +1,15 @@
-﻿using DbgX.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
 using System.IO.Compression;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using DbgX.Interfaces;
 using DbgX.Interfaces.Services;
 using DbgX.Util;
 
-namespace RunCSharp
+namespace WinDbgExt.RunCSharp
 {
     [RibbonTabGroupExtensionMetadata("ViewRibbonTab", "Windows", 5), Export(typeof(IDbgRibbonTabGroupExtension))]
     public class EditorViewModel : IDbgRibbonTabGroupExtension
@@ -60,7 +60,7 @@ namespace RunCSharp
                 {
                     string version;
 
-                    using (var stream = new StreamReader(assembly.GetManifestResourceStream("RunCSharp.version.txt")))
+                    using (var stream = new StreamReader(assembly.GetManifestResourceStream("WinDbgExt.RunCSharp.version.txt")))
                     {
                         version = stream.ReadLine();
                     }
@@ -81,7 +81,7 @@ namespace RunCSharp
 
             var tempFile = Path.GetTempFileName();
 
-            using (var stream = assembly.GetManifestResourceStream("RunCSharp.runner.zip"))
+            using (var stream = assembly.GetManifestResourceStream("WinDbgExt.RunCSharp.runner.zip"))
             {
                 using (var destinationStream = File.OpenWrite(tempFile))
                 {
