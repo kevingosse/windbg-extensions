@@ -13,9 +13,11 @@
         </Grid.RowDefinitions>
 
         <avalonedit:TextEditor 
+            x:Name="TextEditor"
             Grid.Row="0"
             Padding="5"
-            SyntaxHighlighting="C#"
+            SyntaxHighlighting="C#" 
+            HorizontalScrollBarVisibility="Auto"
             Document="{Binding Path=EditorDocument, Mode=TwoWay}"
             KeyDown="TextEditor_KeyDown"/>
         <Button Grid.Row="1" Content="Run (Ctrl + Return)" Command="{Binding Path=RunCommand}" />
