@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DbgX.Interfaces.Services;
+using DbgX.Interfaces.UI;
 
 namespace WinDbgExt.History
 {
     public partial class CommandControl
     {
+        private static int _index;
+
         private readonly IDbgConsole _console;
         private readonly IHistoryManager _historyManager;
 
@@ -18,8 +22,10 @@ namespace WinDbgExt.History
         {
             _console = console;
             _historyManager = historyManager;
-
+            
             InitializeComponent();
+
+            SetTabTitle(this, new ToolWindowTitle("Window " + Interlocked.Increment(ref _index)));
 
             AppendDmlOutput(content);
         }
