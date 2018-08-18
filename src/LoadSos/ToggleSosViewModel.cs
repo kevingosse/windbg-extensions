@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Runtime.CompilerServices;
@@ -15,14 +14,19 @@ namespace WinDbgExt.LoadSos
 {
     [RibbonTabGroupExtensionMetadata("HomeRibbonTab", "Help", 0), Export(typeof(IDbgRibbonTabGroupExtension))]
     [Export(typeof(IDbgCommandExecutionListener))]
-    [Export(typeof(IDbgEngineConnectionListener))]
-    public class ToggleSosViewModel : IDbgRibbonTabGroupExtension, IDbgCommandExecutionListener, IDbgEngineConnectionListener, INotifyPropertyChanged
+    [Export(typeof(IDbgRefreshListener))]
+    public class ToggleSosViewModel : IDbgRibbonTabGroupExtension, IDbgCommandExecutionListener, INotifyPropertyChanged, IDbgRefreshListener
     {
+        private bool _engineLoaded;
+
         [Import]
         private IDbgConsole _console;
 
         [Import]
         private IDbgEngineControl _engineControl;
+
+        [Import]
+        private IDbgEngineState _engineState;
 
         private bool _isLoaded;
 
@@ -50,7 +54,7 @@ namespace WinDbgExt.LoadSos
 
         private bool CanLoadSos()
         {
-            return _engineControl.ConnectionState != EngineConnectionState.NoSession && !IsLoaded;
+            return _engineState.ConnectionState != EngineConnectionState.NoSession && !IsLoaded;
         }
 
         public void OnCommandExecuted(string command)
@@ -61,9 +65,18 @@ namespace WinDbgExt.LoadSos
             }
         }
 
-        public void OnEngineConnectionChanged(EngineConnectionState state)
+        public void OnRefreshRequested()
         {
-            LoadSosCommand.RaiseCanExecuteChanged();
+            if (!_engineLoaded)
+            {
+                _engineState.PropertyChanged += EngineStatePropertyChanged;
+                _engineLoaded = true;
+            }
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private async Task LoadSos()
@@ -72,9 +85,17 @@ namespace WinDbgExt.LoadSos
             _console.PrintTextToConsole(await _console.ExecuteLocalCommandAndCaptureOutputAsync(".cordll -l -e"));
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void EngineStatePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (e.PropertyName == "ConnectionState")
+            {
+                if (_engineState.ConnectionState == EngineConnectionState.NoSession)
+                {
+                    IsLoaded = false;
+                }
+
+                LoadSosCommand.RaiseCanExecuteChanged();
+            }
         }
     }
 }

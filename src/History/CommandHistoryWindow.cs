@@ -13,9 +13,8 @@ namespace WinDbgExt.History
     [NamedPartMetadata("CommandHistoryWindow"), Export(typeof(IDbgToolWindow))]
     [Export(typeof(IDbgDmlOutputListener))]
     [Export(typeof(IDbgCommandExecutionListener))]
-    [Export(typeof(IDbgEngineStatusListener))]
     [Export(typeof(IHistoryManager))]
-    public class CommandHistoryWindow : IDbgToolWindow, IDbgDmlOutputListener, IDbgCommandExecutionListener, IDbgEngineStatusListener, IHistoryManager
+    public class CommandHistoryWindow : IDbgToolWindow, IDbgDmlOutputListener, IDbgCommandExecutionListener, IHistoryManager
     {
         private StringBuilder _output = new StringBuilder();
         private string _currentCommand;
@@ -46,18 +45,18 @@ namespace WinDbgExt.History
             _output.Append(text);
         }
 
+        public void OnCommandCompletion()
+        {
+            if (_currentCommand != null)
+            {
+                LogCommand(_currentCommand, _output.ToString());
+            }
+        }
+
         public void OnCommandExecuted(string command)
         {
             _output.Clear();
             _currentCommand = command;
-        }
-
-        public void OnEngineStatusChanged(bool busy)
-        {
-            if (!busy && _currentCommand != null)
-            {
-                LogCommand(_currentCommand, _output.ToString());
-            }
         }
 
         public void LogCommand(string command, string output)
