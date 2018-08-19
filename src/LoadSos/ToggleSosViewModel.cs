@@ -23,9 +23,6 @@ namespace WinDbgExt.LoadSos
         private IDbgConsole _console;
 
         [Import]
-        private IDbgEngineControl _engineControl;
-
-        [Import]
         private IDbgEngineState _engineState;
 
         private bool _isLoaded;
