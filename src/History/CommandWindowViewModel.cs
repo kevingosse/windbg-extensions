@@ -6,7 +6,7 @@ using DbgX.Interfaces.Services;
 namespace WinDbgExt.History
 {
     [NamedPartMetadata("CommandWindow"), Export(typeof(IDbgToolWindow))]
-    public class CommandWindow : IDbgToolWindow
+    public class CommandWindowViewModel : IDbgToolWindow
     {
         [Import]
         private IDbgConsole _console;
@@ -16,7 +16,7 @@ namespace WinDbgExt.History
 
         public FrameworkElement GetToolWindowView(object parameter)
         {
-            return new CommandControl(_console, _historyManager, (string)parameter);
+            return new CommandWindow(_console, _historyManager, (string)parameter);
         }
     }
 }

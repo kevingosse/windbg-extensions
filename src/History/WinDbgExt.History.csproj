@@ -62,23 +62,23 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandControl.xaml.cs">
-      <DependentUpon>CommandControl.xaml</DependentUpon>
+    <Compile Include="CommandWindow.xaml.cs">
+      <DependentUpon>CommandWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CommandHistoryWindow.cs" />
-    <Compile Include="CommandWindow.cs" />
+    <Compile Include="HistoryWindowViewModel.cs" />
+    <Compile Include="CommandWindowViewModel.cs" />
     <Compile Include="HistoryButton.xaml.cs">
       <DependentUpon>HistoryButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HistoryControl.xaml.cs">
-      <DependentUpon>HistoryControl.xaml</DependentUpon>
+    <Compile Include="HistoryWindow.xaml.cs">
+      <DependentUpon>HistoryWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="HistoryViewModel.cs" />
+    <Compile Include="HistoryButtonViewModel.cs" />
     <Compile Include="IHistoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CommandControl.xaml">
+    <Page Include="CommandWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -86,7 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="HistoryControl.xaml">
+    <Page Include="HistoryWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

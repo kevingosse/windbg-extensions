@@ -11,14 +11,14 @@ using DbgX.Interfaces.UI;
 
 namespace WinDbgExt.History
 {
-    public partial class CommandControl
+    public partial class CommandWindow
     {
         private static int _index;
 
         private readonly IDbgConsole _console;
         private readonly IHistoryManager _historyManager;
 
-        public CommandControl(IDbgConsole console, IHistoryManager historyManager, string content)
+        public CommandWindow(IDbgConsole console, IHistoryManager historyManager, string content)
         {
             _console = console;
             _historyManager = historyManager;

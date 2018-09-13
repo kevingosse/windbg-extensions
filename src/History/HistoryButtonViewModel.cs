@@ -7,12 +7,12 @@ using DbgX.Util;
 namespace WinDbgExt.History
 {
     [RibbonTabGroupExtensionMetadata("ViewRibbonTab", "Windows", 5), Export(typeof(IDbgRibbonTabGroupExtension))]
-    public class HistoryViewModel : IDbgRibbonTabGroupExtension
+    public class HistoryButtonViewModel : IDbgRibbonTabGroupExtension
     {
         [Import]
         private IDbgToolWindowManager _toolWindowManager;
 
-        public HistoryViewModel()
+        public HistoryButtonViewModel()
         {
             ShowCommand = new DelegateCommand(Show);
         }
@@ -23,7 +23,7 @@ namespace WinDbgExt.History
 
         private void Show()
         {
-            _toolWindowManager.OpenToolWindow("CommandHistoryWindow");
+            _toolWindowManager.OpenToolWindow("HistoryWindow");
         }
     }
 }

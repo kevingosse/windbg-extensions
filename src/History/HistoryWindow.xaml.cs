@@ -1,8 +1,8 @@
 ﻿namespace WinDbgExt.History
 {
-    public partial class HistoryControl
+    public partial class HistoryWindow
     {
-        public HistoryControl()
+        public HistoryWindow()
         {
             InitializeComponent();
         }

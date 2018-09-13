@@ -10,11 +10,11 @@ using DbgX.Util;
 
 namespace WinDbgExt.History
 {
-    [NamedPartMetadata("CommandHistoryWindow"), Export(typeof(IDbgToolWindow))]
+    [NamedPartMetadata("HistoryWindow"), Export(typeof(IDbgToolWindow))]
     [Export(typeof(IDbgDmlOutputListener))]
     [Export(typeof(IDbgCommandExecutionListener))]
     [Export(typeof(IHistoryManager))]
-    public class CommandHistoryWindow : IDbgToolWindow, IDbgDmlOutputListener, IDbgCommandExecutionListener, IHistoryManager
+    public class HistoryWindowViewModel : IDbgToolWindow, IDbgDmlOutputListener, IDbgCommandExecutionListener, IHistoryManager
     {
         private StringBuilder _output = new StringBuilder();
         private string _currentCommand;
@@ -25,7 +25,7 @@ namespace WinDbgExt.History
         [Import]
         private IDbgToolWindowManager _toolWindowManager;
 
-        public CommandHistoryWindow()
+        public HistoryWindowViewModel()
         {
             History = new ObservableCollection<Tuple<string, string>>();
             OpenCommand = new DelegateCommand<string>(Open);
@@ -35,7 +35,7 @@ namespace WinDbgExt.History
 
         public FrameworkElement GetToolWindowView(object parameter)
         {
-            return new HistoryControl { DataContext = this };
+            return new HistoryWindow { DataContext = this };
         }
 
         public ObservableCollection<Tuple<string, string>> History { get; }

@@ -6,9 +6,9 @@ namespace WinDbgExt.History
     /// </summary>
     public partial class HistoryButton
     {
-        public HistoryButton(HistoryViewModel viewModel)
+        public HistoryButton(HistoryButtonViewModel buttonViewModel)
         {
-            DataContext = viewModel;
+            DataContext = buttonViewModel;
             InitializeComponent();
         }
     }
