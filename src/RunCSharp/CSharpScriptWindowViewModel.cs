@@ -17,6 +17,9 @@ namespace WinDbgExt.RunCSharp
         [Import]
         private IDbgConsole _console;
 
+        [Import]
+        private IDbgThemeService _themeService;
+
         public CSharpScriptWindowViewModel()
         {
             EditorDocument = new TextDocument();
@@ -27,12 +30,7 @@ namespace WinDbgExt.RunCSharp
 
         public TextDocument EditorDocument { get; set; }
 
-        public FrameworkElement GetToolWindowView(object _)
-        {
-            var control = new CSharpScriptWindow { DataContext = this };
-
-            return control;
-        }
+        public FrameworkElement GetToolWindowView(object _) => new CSharpScriptWindow(this, _themeService);
 
         private async void Run()
         {
