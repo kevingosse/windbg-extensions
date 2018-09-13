@@ -14,7 +14,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <RichTextBox x:Name="ContentTextBox" FontFamily="Consolas" Grid.Row="0" IsDocumentEnabled="True" VerticalScrollBarVisibility="Visible" IsReadOnly="True">
+        <RichTextBox
+            x:Name="ContentTextBox"
+            FontFamily="Consolas"
+            Grid.Row="0"
+            IsDocumentEnabled="True"
+            VerticalScrollBarVisibility="Visible"
+            IsReadOnly="True"
+            PreviewMouseWheel="ContentTextBox_MouseWheel">
             <RichTextBox.Document>
                 <FlowDocument></FlowDocument>
             </RichTextBox.Document>

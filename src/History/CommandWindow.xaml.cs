@@ -93,6 +93,27 @@ namespace WinDbgExt.History
 
             Dispatcher.InvokeAsync(() => ContentTextBox.ScrollToEnd(), DispatcherPriority.ApplicationIdle);
         }
+
+        private void ContentTextBox_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
+                return;
+            }
+
+            var fontSize = ContentTextBox.FontSize;
+
+            fontSize += e.Delta > 0 ? 1 : -1;
+
+            if (fontSize < 8)
+            {
+                fontSize = 8;
+            }
+
+            ContentTextBox.FontSize = fontSize;
+
+            e.Handled = true;
+        }
     }
 
     public class DmlCommand : ICommand
