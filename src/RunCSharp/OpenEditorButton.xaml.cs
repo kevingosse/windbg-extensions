@@ -5,7 +5,7 @@
     /// </summary>
     public partial class OpenEditorButton
     {
-        public OpenEditorButton(EditorViewModel viewModel)
+        public OpenEditorButton(OpenEditorViewModel viewModel)
         {
             DataContext = viewModel;
             InitializeComponent();

@@ -12,12 +12,12 @@ using ICSharpCode.AvalonEdit.Document;
 namespace WinDbgExt.RunCSharp
 {
     [NamedPartMetadata("CSharpScriptWindow"), Export(typeof(IDbgToolWindow))]
-    public class CSharpScriptWindow : IDbgToolWindow
+    public class CSharpScriptWindowViewModel : IDbgToolWindow
     {
         [Import]
         private IDbgConsole _console;
 
-        public CSharpScriptWindow()
+        public CSharpScriptWindowViewModel()
         {
             EditorDocument = new TextDocument();
             RunCommand = new DelegateCommand(Run);
@@ -29,9 +29,7 @@ namespace WinDbgExt.RunCSharp
 
         public FrameworkElement GetToolWindowView(object _)
         {
-            var control = new EditorControl { DataContext = this };
-
-            ToolWindowView.SetTabTitle(control, new ToolWindowTitle("Run C# script"));
+            var control = new CSharpScriptWindow { DataContext = this };
 
             return control;
         }

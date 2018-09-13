@@ -2,13 +2,13 @@
 
 namespace WinDbgExt.RunCSharp
 {
-    public partial class EditorControl
+    public partial class CSharpScriptWindow
     {
-        private CSharpScriptWindow _viewModel;
+        private CSharpScriptWindowViewModel _viewModel;
 
-        public EditorControl()
+        public CSharpScriptWindow()
         {
-            DataContextChanged += (_, e) => _viewModel = e.NewValue as CSharpScriptWindow;
+            DataContextChanged += (_, e) => _viewModel = e.NewValue as CSharpScriptWindowViewModel;
             InitializeComponent();
             TextEditor.TextArea.MouseWheel += TextArea_MouseWheel;
         }

@@ -12,7 +12,7 @@ using DbgX.Util;
 namespace WinDbgExt.RunCSharp
 {
     [RibbonTabGroupExtensionMetadata("ViewRibbonTab", "Windows", 5), Export(typeof(IDbgRibbonTabGroupExtension))]
-    public class EditorViewModel : IDbgRibbonTabGroupExtension
+    public class OpenEditorViewModel : IDbgRibbonTabGroupExtension
     {
         private const string RunnerAssembly = "WindbgScriptRunner.dll";
 
@@ -24,7 +24,7 @@ namespace WinDbgExt.RunCSharp
         [Import]
         private IDbgConsole _console;
 
-        public EditorViewModel()
+        public OpenEditorViewModel()
         {
             ShowCommand = new DelegateCommand(Show);
         }
