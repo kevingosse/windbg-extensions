@@ -93,21 +93,21 @@ namespace WinDbgExt.History
 
             Dispatcher.InvokeAsync(() => ContentTextBox.ScrollToEnd(), DispatcherPriority.ApplicationIdle);
         }
+    }
 
-        private class DmlCommand : ICommand
+    public class DmlCommand : ICommand
+    {
+        private readonly Action _command;
+
+        public DmlCommand(Action command)
         {
-            private readonly Action _command;
-
-            public DmlCommand(Action command)
-            {
-                _command = command;
-            }
-
-            public event EventHandler CanExecuteChanged;
-
-            public bool CanExecute(object parameter) => true;
-
-            public void Execute(object parameter) => _command();
+            _command = command;
         }
+
+        public event EventHandler CanExecuteChanged;
+
+        public bool CanExecute(object parameter) => true;
+
+        public void Execute(object parameter) => _command();
     }
 }
