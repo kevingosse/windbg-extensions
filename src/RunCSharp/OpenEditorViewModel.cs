@@ -24,6 +24,9 @@ namespace WinDbgExt.RunCSharp
         [Import]
         private IDbgConsole _console;
 
+        [Import]
+        private IDbgTargetQuery _targetQuery;
+
         public OpenEditorViewModel()
         {
             ShowCommand = new DelegateCommand(Show);
@@ -37,20 +40,24 @@ namespace WinDbgExt.RunCSharp
         {
             if (!_isRunnerLoaded)
             {
-                var path = PrepareRunner();
+                bool is64bits = await _targetQuery.IsPointer64BitAsync();
+
+                var path = PrepareRunner(is64bits);
                 await LoadRunner(path);
             }
 
             _toolWindowManager.OpenToolWindow("CSharpScriptWindow");
         }
 
-        private string PrepareRunner()
+        private string PrepareRunner(bool is64bits)
         {
             var assembly = Assembly.GetExecutingAssembly();
 
             var baseFolder = Path.GetDirectoryName(assembly.Location);
 
-            var destinationFolder = Path.Combine(baseFolder, "CsharpScriptRunner");
+            var suffix = is64bits ? "x64" : "x86";
+
+            var destinationFolder = Path.Combine(baseFolder, $"CsharpScriptRunner-{suffix}");
 
             if (Directory.Exists(destinationFolder))
             {
@@ -81,7 +88,7 @@ namespace WinDbgExt.RunCSharp
 
             var tempFile = Path.GetTempFileName();
 
-            using (var stream = assembly.GetManifestResourceStream("WinDbgExt.RunCSharp.runner.zip"))
+            using (var stream = assembly.GetManifestResourceStream($"WinDbgExt.RunCSharp.runner-{suffix}.zip"))
             {
                 using (var destinationStream = File.OpenWrite(tempFile))
                 {

@@ -58,28 +58,17 @@ namespace WindbgScriptRunner
                 return;
             }
 
-            string basePath;
-
-            try
-            {
-                basePath = Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%\\Packages\\" + Windows.ApplicationModel.Package.Current.Id.FamilyName);
-                basePath = Path.Combine(basePath, @"LocalCache\Local\DBG\UIExtensions\CsharpScriptRunner");
-            }
-            catch (Exception) // This will throw if running without the Windows Bridge
-            {
-                basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            }
-
             try
             {
                 var code = File.ReadAllText(args);
+
+                var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
                 using (var codeProvider = new CSharpCodeProvider())
                 {
                     var parameters = new CompilerParameters(new[]
                     {
                         "mscorlib.dll",
-                        "System.dll",
                         "System.Core.dll",
                         "Microsoft.CSharp.dll",
                         Path.Combine(basePath, "Microsoft.Diagnostics.Runtime.dll"),
@@ -159,7 +148,7 @@ namespace WindbgScriptRunner
                 // for a live process or iDNA trace.  If you use the IDebug* apis to detect
                 // that we are debugging a crash dump you may skip this call for better perf.
                 Runtime.Flush();
-
+                
                 // Temporary workaround for a bug in ClrMD
                 // To be removed when https://github.com/Microsoft/clrmd/pull/94 get published on NuGet
                 var type = Type.GetType("Microsoft.Diagnostics.Runtime.Desktop.DesktopRuntimeBase, Microsoft.Diagnostics.Runtime");
