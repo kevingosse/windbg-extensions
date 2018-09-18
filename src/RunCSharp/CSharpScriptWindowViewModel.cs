@@ -36,6 +36,7 @@ namespace WinDbgExt.RunCSharp
         {
             var code = $@"
 using System;
+using System.Collections.Generic;
 using Microsoft.Diagnostics.Runtime;
 using System.Diagnostics;
 
