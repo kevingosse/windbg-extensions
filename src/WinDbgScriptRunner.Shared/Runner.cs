@@ -69,6 +69,7 @@ namespace WindbgScriptRunner
                     var parameters = new CompilerParameters(new[]
                     {
                         "mscorlib.dll",
+                        "System.dll",
                         "System.Core.dll",
                         "Microsoft.CSharp.dll",
                         Path.Combine(basePath, "Microsoft.Diagnostics.Runtime.dll"),
