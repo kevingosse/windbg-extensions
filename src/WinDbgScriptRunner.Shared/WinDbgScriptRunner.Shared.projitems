@@ -10,6 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DebugEngineStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScriptInvoker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScriptRunner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Runner.cs" />
   </ItemGroup>
 </Project>

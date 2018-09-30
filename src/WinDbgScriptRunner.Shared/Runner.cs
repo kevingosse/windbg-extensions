@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Microsoft.CSharp;
 using Microsoft.Diagnostics.Runtime;
 using Microsoft.Diagnostics.Runtime.Interop;
 using RGiesecke.DllExport;
@@ -16,89 +14,36 @@ namespace WindbgScriptRunner
 {
     public class Runner
     {
-        static Runner()
+        private static string GetCurrentAssemblyPath()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
-        }
+            string codebase = Assembly.GetExecutingAssembly().CodeBase;
 
-        private static readonly string[] References =
-        {
-            "Microsoft.Diagnostics.Runtime",
-            "DynaMD"
-        };
+            if (codebase.StartsWith("file://"))
+                codebase = codebase.Substring(8).Replace('/', '\\');
 
-        private static Assembly ResolveAssembly(object sender, ResolveEventArgs args)
-        {
-            var assemblyName = new AssemblyName(args.Name);
-
-            if (References.Any(r => string.Equals(assemblyName.Name, r, StringComparison.OrdinalIgnoreCase)))
-            {
-                string codebase = Assembly.GetExecutingAssembly().CodeBase;
-
-                if (codebase.StartsWith("file://"))
-                    codebase = codebase.Substring(8).Replace('/', '\\');
-
-                string directory = Path.GetDirectoryName(codebase);
-                string path = Path.Combine(directory, assemblyName.Name) + ".dll";
-                return Assembly.LoadFile(path);
-            }
-
-            return null;
+            return Path.GetDirectoryName(codebase);
         }
 
         public static IDebugClient DebugClient { get; private set; }
         public static DataTarget DataTarget { get; private set; }
         public static ClrRuntime Runtime { get; private set; }
 
+        public static AppDomain _childDomain;
+
         [DllExport("compileandrun")]
         public static void Script(IntPtr client, [MarshalAs(UnmanagedType.LPStr)] string args)
         {
-            if (!InitApi(client))
+            if (_childDomain == null)
             {
-                return;
+                _childDomain = AppDomain.CreateDomain("CSharpRunner", AppDomain.CurrentDomain.Evidence, GetCurrentAssemblyPath(), ".", false);
             }
 
-            try
-            {
-                var code = File.ReadAllText(args);
+            var invoker = new ScriptInvoker(client, args);
 
-                var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-                using (var codeProvider = new CSharpCodeProvider())
-                {
-                    var parameters = new CompilerParameters(new[]
-                    {
-                        "mscorlib.dll",
-                        "System.dll",
-                        "System.Core.dll",
-                        "Microsoft.CSharp.dll",
-                        Path.Combine(basePath, "Microsoft.Diagnostics.Runtime.dll"),
-                        Path.Combine(basePath, "DynaMD.dll")
-                    });
-                    parameters.GenerateInMemory = true;
-
-                    var results = codeProvider.CompileAssemblyFromSource(parameters, code);
-
-                    if (results.Errors.Count > 0)
-                    {
-                        Console.WriteLine(string.Join("\r\n", results.Errors.Cast<CompilerError>().Select(l => l.ErrorText)));
-                        return;
-                    }
-
-                    var type = results.CompiledAssembly.GetType("Test.Program");
-
-                    var method = type.GetMethod("Run", BindingFlags.Static | BindingFlags.Public);
-
-                    method.Invoke(null, new object[] { Runtime.Heap });
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("An error occured: " + ex);
-            }
+            _childDomain.DoCallBack(invoker.Invoke);
         }
 
-        private static bool InitApi(IntPtr ptrClient)
+        public static bool InitApi(IntPtr ptrClient)
         {
             // On our first call to the API:
             //   1. Store a copy of IDebugClient in DebugClient.
@@ -149,7 +94,7 @@ namespace WindbgScriptRunner
                 // for a live process or iDNA trace.  If you use the IDebug* apis to detect
                 // that we are debugging a crash dump you may skip this call for better perf.
                 Runtime.Flush();
-                
+
                 // Temporary workaround for a bug in ClrMD
                 // To be removed when https://github.com/Microsoft/clrmd/pull/94 get published on NuGet
                 var type = Type.GetType("Microsoft.Diagnostics.Runtime.Desktop.DesktopRuntimeBase, Microsoft.Diagnostics.Runtime");
