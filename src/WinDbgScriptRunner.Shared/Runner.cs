@@ -14,16 +14,6 @@ namespace WindbgScriptRunner
 {
     public class Runner
     {
-        private static string GetCurrentAssemblyPath()
-        {
-            string codebase = Assembly.GetExecutingAssembly().CodeBase;
-
-            if (codebase.StartsWith("file://"))
-                codebase = codebase.Substring(8).Replace('/', '\\');
-
-            return Path.GetDirectoryName(codebase);
-        }
-
         public static IDebugClient DebugClient { get; private set; }
         public static DataTarget DataTarget { get; private set; }
         public static ClrRuntime Runtime { get; private set; }
@@ -126,6 +116,25 @@ namespace WindbgScriptRunner
         static uint DEBUG_EXTENSION_VERSION(uint Major, uint Minor)
         {
             return ((((Major) & 0xffff) << 16) | ((Minor) & 0xffff));
+        }
+
+        private static string GetCurrentAssemblyPath()
+        {
+            string basePath;
+            
+            try
+            {
+                var suffix = Environment.Is64BitProcess ? "x64" : "x86";
+
+                basePath = Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%\\Packages\\" + Windows.ApplicationModel.Package.Current.Id.FamilyName);
+                basePath = Path.Combine(basePath, $@"LocalCache\Local\DBG\UIExtensions\CsharpScriptRunner-{suffix}");
+            }
+            catch (Exception) // This will throw if running without the Windows Bridge	
+            {
+                basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            }
+
+            return basePath;
         }
     }
 }

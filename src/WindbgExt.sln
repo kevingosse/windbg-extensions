@@ -16,6 +16,9 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "WinDbgScriptRunner.Shared", "WinDbgScriptRunner.Shared\WinDbgScriptRunner.Shared.shproj", "{6D6B6685-853F-4652-BF60-54BBFA50DD47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindbgScriptRunner.x64", "WindbgScriptRunner.x64\WindbgScriptRunner.x64.csproj", "{937157A8-8E05-447B-8A8C-AB0CAC4E7A80}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4EA1E17B-758E-41EF-A592-A8273F49385B} = {4EA1E17B-758E-41EF-A592-A8273F49385B}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindbgScriptRunner.x86", "WindbgScriptRunner.x86\WindbgScriptRunner.x86.csproj", "{4EA1E17B-758E-41EF-A592-A8273F49385B}"
 EndProject
