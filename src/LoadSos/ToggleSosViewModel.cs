@@ -14,8 +14,8 @@ namespace WinDbgExt.LoadSos
 {
     [RibbonTabGroupExtensionMetadata("HomeRibbonTab", "Help", 0), Export(typeof(IDbgRibbonTabGroupExtension))]
     [Export(typeof(IDbgCommandExecutionListener))]
-    [Export(typeof(IDbgRefreshListener))]
-    public class ToggleSosViewModel : IDbgRibbonTabGroupExtension, IDbgCommandExecutionListener, INotifyPropertyChanged, IDbgRefreshListener
+    [Export(typeof(IDbgStartupListener))]
+    public class ToggleSosViewModel : IDbgRibbonTabGroupExtension, IDbgCommandExecutionListener, INotifyPropertyChanged, IDbgStartupListener
     {
         private bool _engineLoaded;
 
@@ -29,6 +29,7 @@ namespace WinDbgExt.LoadSos
 
         public ToggleSosViewModel()
         {
+
             LoadSosCommand = new AsyncDelegateCommand(LoadSos, CanLoadSos);
         }
 
@@ -62,7 +63,7 @@ namespace WinDbgExt.LoadSos
             }
         }
 
-        public void OnRefreshRequested()
+        public void OnStartup()
         {
             if (!_engineLoaded)
             {
