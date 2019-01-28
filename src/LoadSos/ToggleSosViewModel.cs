@@ -57,7 +57,8 @@ namespace WinDbgExt.LoadSos
 
         public void OnCommandExecuted(string command)
         {
-            if (command.StartsWith(".loadby sos"))
+            if (command.StartsWith(".loadby sos") 
+            || (command.StartsWith(".cordll") && command.Contains(" -l")))
             {
                 IsLoaded = true;
             }
@@ -79,7 +80,6 @@ namespace WinDbgExt.LoadSos
 
         private async Task LoadSos()
         {
-            _console.PrintTextToConsole(await _console.ExecuteLocalCommandAndCaptureOutputAsync(".loadby sos clr"));
             _console.PrintTextToConsole(await _console.ExecuteLocalCommandAndCaptureOutputAsync(".cordll -l -e"));
         }
 

@@ -94,7 +94,9 @@ namespace WindbgScriptRunner
                 {
                     foreach (ProcessModule module in process.Modules)
                     {
-                        if (module.FileName.ToLower().Contains("mscordacwks"))
+                        var fileName = module.FileName.ToLowerInvariant();
+
+                        if (fileName.Contains("mscordacwks") || fileName.Contains("mscordaccore"))
                         {
                             // TODO:  This does not support side-by-side CLRs.
                             Runtime = DataTarget.ClrVersions.Single().CreateRuntime(module.FileName);
