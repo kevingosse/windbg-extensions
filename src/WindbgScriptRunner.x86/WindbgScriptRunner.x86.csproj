@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -39,8 +41,7 @@
       <HintPath>..\packages\Microsoft.Diagnostics.Runtime.1.0.0\lib\net45\Microsoft.Diagnostics.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="RGiesecke.DllExport.Metadata, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8f52d83c1a22df51, processorArchitecture=MSIL">
-      <HintPath>..\packages\UnmanagedExports.1.2.7\lib\net\RGiesecke.DllExport.Metadata.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\UnmanagedExports.Repack.1.0.4\lib\net452\RGiesecke.DllExport.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -68,7 +69,6 @@
   </ItemGroup>
   <Import Project="..\WinDbgScriptRunner.Shared\WinDbgScriptRunner.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="../packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.targets" Condition="Exists('../packages/UnmanagedExports.1.2.7/tools/RGiesecke.DllExport.targets')" />
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
@@ -107,4 +107,11 @@
     ]]></Code>
     </Task>
   </UsingTask>
+  <Import Project="..\packages\UnmanagedExports.Repack.1.0.4\build\UnmanagedExports.Repack.targets" Condition="Exists('..\packages\UnmanagedExports.Repack.1.0.4\build\UnmanagedExports.Repack.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\UnmanagedExports.Repack.1.0.4\build\UnmanagedExports.Repack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UnmanagedExports.Repack.1.0.4\build\UnmanagedExports.Repack.targets'))" />
+  </Target>
 </Project>
