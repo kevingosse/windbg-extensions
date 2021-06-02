@@ -45,6 +45,11 @@ namespace WindbgScriptRunner
 
                 basePath = Environment.ExpandEnvironmentVariables("%LOCALAPPDATA%\\Packages\\" + Windows.ApplicationModel.Package.Current.Id.FamilyName);
                 basePath = Path.Combine(basePath, $@"LocalCache\Local\DBG\UIExtensions\CsharpScriptRunner-{suffix}");
+
+                if (!Directory.Exists(basePath))
+                {
+                    basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                }
             }
             catch (Exception) // This will throw if running without the Windows Bridge	
             {
