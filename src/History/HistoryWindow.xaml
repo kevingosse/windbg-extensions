@@ -10,12 +10,7 @@
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ListBox x:Name="HistoryList" ItemsSource="{Binding Path=History}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding Path=OpenCommand}" CommandParameter="{Binding Path=SelectedItem.Item2, ElementName=HistoryList}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+        <ListBox x:Name="HistoryList" ItemsSource="{Binding Path=History}" MouseDoubleClick="HistoryList_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Item1}" />
