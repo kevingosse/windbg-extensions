@@ -1,0 +1,26 @@
+﻿<ui:ToolWindowView x:Class="WinDbgExt.AiAssistant.AiAssistantWindow"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:local="clr-namespace:WinDbgExt.AiAssistant"
+                xmlns:ui="clr-namespace:DbgX.Interfaces.UI;assembly=DbgX.Interfaces"
+                ui:ToolWindowView.TabTitle="AI Assistant"
+                mc:Ignorable="d" 
+                d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Problem statement:" />
+
+            <TextBox KeyDown="GoalTextBox_KeyDown" />
+        </StackPanel>
+
+        <RichTextBox Grid.Row="2" x:Name="AiOutputTextBox" Margin="0 5 0 0" IsDocumentEnabled="True" IsReadOnly="True"/>
+    </Grid>
+</ui:ToolWindowView>
