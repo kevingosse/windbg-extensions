@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <RootNamespace>WinDbgExt.AiAssistant</RootNamespace>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>AnyCPU</Platforms>
     <UseWPF>true</UseWPF>
     <LangVersion>latest</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -35,10 +35,6 @@
     <Reference Include="../../lib/DbgX.Util.dll" />
     <Reference Include="../../lib/Fluent.dll" />
     <Reference Include="../../lib/System.ComponentModel.Composition.dll" />
-    <Reference Include="../../lib/System.Xaml.dll" />
-    <Reference Include="../../lib/PresentationFramework.dll" />
-    <Reference Include="../../lib/PresentationCore.dll" />
-    <Reference Include="../../lib/WindowsBase.dll" />
   </ItemGroup>
 
   <ItemGroup>
