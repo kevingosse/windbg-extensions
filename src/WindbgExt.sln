@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33417.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinDbgExt.History", "History\WinDbgExt.History.csproj", "{C517DEE9-8828-4366-99A8-3E2C7F0167FC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinDbgExt.LoadSos", "LoadSos\WinDbgExt.LoadSos.csproj", "{DB78C027-0075-450F-AA07-643E46EBAB39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinDbgExt.History", "History\WinDbgExt.History.csproj", "{C517DEE9-8828-4366-99A8-3E2C7F0167FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinDbgExt.RunCSharp", "RunCSharp\WinDbgExt.RunCSharp.csproj", "{ACC95BA0-308A-4932-840A-D3346E98F33A}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -25,6 +23,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinDbgScriptRunner", "WinDbgScriptRunner", "{65691364-2EAF-4A99-97DF-81F168E317AB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinDbgExt.AiAssistant", "AiAssistant\WinDbgExt.AiAssistant.csproj", "{F6E3A270-5E52-40BE-980B-FAD46A1A4E07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "..\build\_build.csproj", "{358DFD86-F7B5-453B-A941-C8A63DFC4010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,18 +48,6 @@ Global
 		{C517DEE9-8828-4366-99A8-3E2C7F0167FC}.Release|x64.Build.0 = Release|Any CPU
 		{C517DEE9-8828-4366-99A8-3E2C7F0167FC}.Release|x86.ActiveCfg = Release|Any CPU
 		{C517DEE9-8828-4366-99A8-3E2C7F0167FC}.Release|x86.Build.0 = Release|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Debug|x64.Build.0 = Debug|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Debug|x86.Build.0 = Debug|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Release|x64.ActiveCfg = Release|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Release|x64.Build.0 = Release|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Release|x86.ActiveCfg = Release|Any CPU
-		{DB78C027-0075-450F-AA07-643E46EBAB39}.Release|x86.Build.0 = Release|Any CPU
 		{ACC95BA0-308A-4932-840A-D3346E98F33A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ACC95BA0-308A-4932-840A-D3346E98F33A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACC95BA0-308A-4932-840A-D3346E98F33A}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -104,6 +92,16 @@ Global
 		{F6E3A270-5E52-40BE-980B-FAD46A1A4E07}.Release|x64.Build.0 = Release|Any CPU
 		{F6E3A270-5E52-40BE-980B-FAD46A1A4E07}.Release|x86.ActiveCfg = Release|Any CPU
 		{F6E3A270-5E52-40BE-980B-FAD46A1A4E07}.Release|x86.Build.0 = Release|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Debug|x64.Build.0 = Debug|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Debug|x86.Build.0 = Debug|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Release|x64.ActiveCfg = Release|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Release|x64.Build.0 = Release|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Release|x86.ActiveCfg = Release|Any CPU
+		{358DFD86-F7B5-453B-A941-C8A63DFC4010}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

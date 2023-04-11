@@ -7,7 +7,6 @@
     <Platforms>AnyCPU</Platforms>
     <UseWPF>true</UseWPF>
     <LangVersion>latest</LangVersion>
-    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,8 +26,4 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /I /Y &quot;$(TargetDir)*.*&quot;  &quot;%25LOCALAPPDATA%25\DBG\UIExtensions&quot;" />
-  </Target>
 </Project>
