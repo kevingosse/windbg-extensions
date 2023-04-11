@@ -11,9 +11,8 @@ using DbgX.Interfaces.Services;
 using OpenAI_API;
 using OpenAI_API.Chat;
 using OpenAI_API.Models;
-using WinDbgExt.AiAssistant;
 
-namespace WinDbgExt.History
+namespace WinDbgExt.AiAssistant
 {
     [Export(typeof(IDbgDmlOutputListener))]
     [NamedPartMetadata("AiAssistant"), Export(typeof(IDbgToolWindow))]

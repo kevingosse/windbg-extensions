@@ -62,6 +62,10 @@
             "type": "string"
           }
         },
+        "Project": {
+          "type": "string",
+          "description": "Project to publish"
+        },
         "Root": {
           "type": "string",
           "description": "Root directory during build execution"
@@ -74,6 +78,7 @@
             "enum": [
               "Clean",
               "Compile",
+              "Install",
               "Restore"
             ]
           }
@@ -90,6 +95,7 @@
             "enum": [
               "Clean",
               "Compile",
+              "Install",
               "Restore"
             ]
           }

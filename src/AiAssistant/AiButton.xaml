@@ -8,6 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Header="AI Assistant"
-             LargeIcon="pack://application:,,,/WinDbgExt.History;component/ribbon_history.png"
+             LargeIcon="pack://application:,,,/WinDbgExt.AiAssistant;component/ribbon_history.png"
              Command="{Binding Path=ShowCommand}">
 </fluent:Button>

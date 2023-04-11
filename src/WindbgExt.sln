@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33417.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinDbgExt.History", "History\WinDbgExt.History.csproj", "{C517DEE9-8828-4366-99A8-3E2C7F0167FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "History", "History\History.csproj", "{C517DEE9-8828-4366-99A8-3E2C7F0167FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinDbgExt.RunCSharp", "RunCSharp\WinDbgExt.RunCSharp.csproj", "{ACC95BA0-308A-4932-840A-D3346E98F33A}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindbgScriptRunner.x86", "W
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinDbgScriptRunner", "WinDbgScriptRunner", "{65691364-2EAF-4A99-97DF-81F168E317AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinDbgExt.AiAssistant", "AiAssistant\WinDbgExt.AiAssistant.csproj", "{F6E3A270-5E52-40BE-980B-FAD46A1A4E07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AiAssistant", "AiAssistant\AiAssistant.csproj", "{F6E3A270-5E52-40BE-980B-FAD46A1A4E07}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "..\build\_build.csproj", "{358DFD86-F7B5-453B-A941-C8A63DFC4010}"
 EndProject
