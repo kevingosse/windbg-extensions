@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>WinDbgExt.History</RootNamespace>
+    <AssemblyName>WindbgExt.History</AssemblyName>
+    <Platforms>AnyCPU</Platforms>
+    <UseWPF>true</UseWPF>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF;Microsoft.WindowsDesktop.App.WindowsForms" TargetingPackVersion="6.0.0" />
+  </ItemGroup>  <ItemGroup>
+    <Reference Include="../../lib/DbgX.Interfaces.dll" />
+    <Reference Include="../../lib/DbgX.Interfaces.Internal.dll" />
+    <Reference Include="../../lib/DbgX.Util.dll" />
+    <Reference Include="../../lib/Fluent.dll" />
+    <Reference Include="../../lib/System.ComponentModel.Composition.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ribbon_history.png" />
+
+    <Resource Include="ribbon_history.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+</Project>

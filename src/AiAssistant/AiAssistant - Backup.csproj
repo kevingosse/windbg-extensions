@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>WinDbgExt.AiAssistant</RootNamespace>
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="../../lib/DbgX.Interfaces.dll" />
+    <Reference Include="../../lib/DbgX.Interfaces.Internal.dll" />
+    <Reference Include="../../lib/DbgX.Services.dll" />
+    <Reference Include="../../lib/DbgX.Util.dll" />
+    <Reference Include="../../lib/Fluent.dll" />
+    <Reference Include="../../lib/System.ComponentModel.Composition.dll" />
+  </ItemGroup>
+
+</Project>
