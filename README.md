@@ -1,9 +1,14 @@
 # windbg-extensions
 Set of extensions for the new WinDbg
 
-- "Load SOS" button
 - History tracking and multiple editor windows
 - C# scripting with ClrMD/DynaMD
+- AI assistant
+
+To install them, checkout the project and run `./build Install`.
+
+The plugins are copied to your `%LOCALAPPDATA%\DBG\UIExtensions` folder.
+
 
 More information on how they work:
 
