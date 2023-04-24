@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AssemblyName>WindbgExt.RunCSharp</AssemblyName>
+    <RootNamespace>WinDbgExt.RunCSharp</RootNamespace>
+    <Platforms>AnyCPU</Platforms>
+    <UseWPF>true</UseWPF>
+    <LangVersion>latest</LangVersion>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF;Microsoft.WindowsDesktop.App.WindowsForms" TargetingPackVersion="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ribbon_csharp.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\runner\version.txt" Link="version.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\runner\runner-x64.zip" Link="runner-x64.zip" />
+    <EmbeddedResource Include="..\..\runner\runner-x86.zip" Link="runner-x86.zip" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AvalonEdit" Version="5.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="../../lib/DbgX.Interfaces.dll" />
+    <Reference Include="../../lib/DbgX.Interfaces.Internal.dll" />
+    <Reference Include="../../lib/DbgX.Services.dll" />
+    <Reference Include="../../lib/DbgX.Util.dll" />
+    <Reference Include="../../lib/Fluent.dll" />
+    <Reference Include="../../lib/System.ComponentModel.Composition.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ribbon_csharp.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+
+</Project>

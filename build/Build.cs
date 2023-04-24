@@ -46,6 +46,7 @@ class Build : NukeBuild
         {
             DotNetBuild(_ => _.SetProjectFile(Solution.History));
             DotNetBuild(_ => _.SetProjectFile(Solution.AiAssistant));
+            DotNetBuild(_ => _.SetProjectFile(Solution.RunCSharp));
         });
 
     Target Install => _ => _
@@ -56,6 +57,7 @@ class Build : NukeBuild
             {
                 PublishProject(Solution.AiAssistant);
                 PublishProject(Solution.History);
+                PublishProject(Solution.RunCSharp);
             }
             else
             {
