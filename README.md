@@ -12,8 +12,8 @@ The plugins are copied to your `%LOCALAPPDATA%\DBG\UIExtensions` folder.
 
 More information on how they work:
 
-http://labs.criteo.com/2017/09/extending-new-windbg-part-1-buttons-commands/
+https://medium.com/criteo-engineering/extending-the-new-windbg-part-1-buttons-and-commands-801f73aeef0d
 
-http://labs.criteo.com/2018/01/extending-new-windbg-part-2-tool-windows-command-output/
+https://medium.com/criteo-engineering/extending-the-new-windbg-part-2-tool-windows-and-command-output-a270df3ab9a2
 
-http://labs.criteo.com/2018/05/extending-new-windbg-part-3-embedding-c-interpreter/
+https://medium.com/criteo-engineering/extending-the-new-windbg-part-3-embedding-a-c-interpreter-c362b844208a
